@@ -10,12 +10,16 @@
         "frontendDist": "../dist"
     },
     "app": {
-        "withGlobalTauri": true,
         "windows": [
             {
-                "title": "aula_assistant",
-                "width": 800,
-                "height": 600
+                "title": "ATec Aula Assistant",
+                "width": 1280,
+                "height": 720,
+                "center": true,
+                "focus": true,
+                "theme": "Dark",
+                "decorations": false,
+                "tabbingIdentifier": "atec.aula_assistant"
             }
         ],
         "security": {
@@ -23,8 +27,14 @@
         }
     },
     "bundle": {
+        "copyright": "Copyright © 2025 ATec Gymnasium Riedberg",
+        "publisher": "ATec Gymnasium Riedberg",
+        "license": "MIT",
+        "category": "Utility",
+        "homepage": "https://github.com/grb-technik/aula_assistant",
+        "licenseFile": "../LICENSE.txt",
         "active": true,
-        "targets": "all",
+        "targets": ["msi", "deb", "rpm"],
         "icon": ["icons/32x32.png", "icons/128x128.png", "icons/128x128@2x.png", "icons/icon.icns", "icons/icon.ico"]
     }
 }
