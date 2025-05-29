@@ -1,0 +1,24 @@
+{
+    "name": "aula_assistant",
+    "private": true,
+    "version": "0.1.0",
+    "type": "module",
+    "scripts": {
+        "dev": "vite",
+        "build": "tsc && vite build",
+        "preview": "vite preview",
+        "tauri": "tauri",
+        "format:fe": "prettier --write ."
+    },
+    "dependencies": {
+        "@tauri-apps/api": "^2",
+        "@tauri-apps/plugin-opener": "^2"
+    },
+    "devDependencies": {
+        "@tauri-apps/cli": "^2",
+        "prettier": "^3.5.3",
+        "prettier-plugin-tailwindcss": "^0.6.11",
+        "typescript": "~5.6.2",
+        "vite": "^6.0.3"
+    }
+}
