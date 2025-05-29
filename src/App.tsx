@@ -8,7 +8,7 @@ function App() {
     return (
         <>
             <WindowProvider>
-                    <AppBar />
+                <AppBar />
             </WindowProvider>
 
             <Toaster />
