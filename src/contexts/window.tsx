@@ -1,12 +1,13 @@
 import React, { createContext, useContext, useEffect, useState, useCallback } from "react";
 import { getCurrentWindow } from "@tauri-apps/api/window";
+import { tryCatch } from "@/lib/try-catch";
+import { toast } from "sonner";
 
 interface WindowContextType {
     isWindowMaximized: boolean;
     minimizeWindow: () => Promise<void>;
     toggleMaximizeWindow: () => Promise<void>;
     closeWindow: () => Promise<void>;
-    updateIsWindowMaximized: () => Promise<void>;
     maximizeWindow: () => Promise<void>;
     unmaximizeWindow: () => Promise<void>;
 }
@@ -18,37 +19,56 @@ export const WindowProvider: React.FC<{ children: React.ReactNode }> = ({ childr
     const appWindow = getCurrentWindow();
 
     const updateIsWindowMaximized = useCallback(async () => {
-        const _isMaximized = await appWindow.isMaximized();
-        setIsWindowMaximized(_isMaximized);
+        const isMaximizedResult = await tryCatch(appWindow.isMaximized());
+        if (isMaximizedResult.error) {
+            toast.error("Failed to check if the window is maximized.");
+            return;
+        }
+        setIsWindowMaximized(isMaximizedResult.data);
     }, [appWindow]);
 
     const minimizeWindow = async () => {
         if (appWindow) {
-            await appWindow.minimize();
+            const actionResult = await tryCatch(appWindow.minimize());
+            if (actionResult.error) {
+                toast.error("Failed to minimize the window.");
+            }
         }
     };
 
     const toggleMaximizeWindow = async () => {
         if (appWindow) {
-            await appWindow.toggleMaximize();
+            const actionResult = await tryCatch(appWindow.toggleMaximize());
+            if (actionResult.error) {
+                toast.error("Failed to minimize the window.");
+            }
         }
     };
 
     const maximizeWindow = async () => {
         if (appWindow) {
-            await appWindow.maximize();
+            const actionResult = await tryCatch(appWindow.maximize());
+            if (actionResult.error) {
+                toast.error("Failed to minimize the window.");
+            }
         }
     };
 
     const unmaximizeWindow = async () => {
         if (appWindow) {
-            await appWindow.unmaximize();
+            const actionResult = await tryCatch(appWindow.unmaximize());
+            if (actionResult.error) {
+                toast.error("Failed to minimize the window.");
+            }
         }
     };
 
     const closeWindow = async () => {
         if (appWindow) {
-            await appWindow.close();
+            const actionResult = await tryCatch(appWindow.close());
+            if (actionResult.error) {
+                toast.error("Failed to minimize the window.");
+            }
         }
     };
 
@@ -73,7 +93,6 @@ export const WindowProvider: React.FC<{ children: React.ReactNode }> = ({ childr
                 minimizeWindow,
                 toggleMaximizeWindow,
                 closeWindow,
-                updateIsWindowMaximized,
                 maximizeWindow,
                 unmaximizeWindow,
             }}>
