@@ -33,5 +33,5 @@ fn main() {
 
     let runtime_options = vec![];
 
-    aula_assistant_lib::run(&runtime_options);
+    aula_assistant_lib::run(runtime_options);
 }
